@@ -12,6 +12,7 @@ var users = require('./routes/user');
 
 var app = express();
 
+
 var env = process.env.NODE_ENV || 'development';
 app.locals.ENV = env;
 app.locals.ENV_DEVELOPMENT = env == 'development';
@@ -31,7 +32,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/users', users);
+
+app.post('/payments/:id', payments.notification);
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {
